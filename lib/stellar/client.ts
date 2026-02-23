@@ -1,8 +1,5 @@
 'use client'
 
-// Stellar integration for Chihiro's Lost Name
-// Adapted from gitBDB/src/stellar/stellarClient.js to Next.js + TypeScript
-
 import { StellarWalletsKit, FreighterModule } from '@creit-tech/stellar-wallets-kit'
 import { Server } from '@stellar/stellar-sdk/rpc'
 import {
@@ -19,7 +16,6 @@ import {
 export const RPC_URL = 'https://soroban-testnet.stellar.org'
 export const NETWORK_PASSPHRASE = Networks.TESTNET
 
-// Contract IDs - set in environment variables
 export const GAME_HUB_CONTRACT_ID =
   process.env.NEXT_PUBLIC_GAME_HUB_CONTRACT_ID ||
   'CB4VZAT2U3UC6XFK3N23SKRF2NDCMP3QHJYMCHHFMZO7MRQO6DQ2EMYG'
@@ -30,12 +26,10 @@ export const CHIHIRO_CONTRACT_ID =
 export const ULTRAHONK_VERIFIER_ID =
   process.env.NEXT_PUBLIC_ULTRAHONK_VERIFIER_ID || null
 
-// Wallet Kit initialization
 let kitInitialized = false
 
 function ensureKit() {
   if (!kitInitialized && typeof window !== 'undefined') {
-    console.log('[Stellar] Initializing StellarWalletsKit')
     StellarWalletsKit.init({
       modules: [new FreighterModule()],
       network: Networks.TESTNET,
@@ -44,7 +38,6 @@ function ensureKit() {
   }
 }
 
-// RPC singleton
 let rpc: Server | null = null
 
 function getRpc(): Server {
@@ -52,13 +45,10 @@ function getRpc(): Server {
   return rpc
 }
 
-// Wallet connection
 export async function connectWallet(): Promise<string> {
   ensureKit()
-  console.log('[Stellar] Opening wallet modal')
   const { address } = await StellarWalletsKit.authModal()
   if (!address) throw new Error('No address returned from wallet')
-  console.log('[Stellar] Connected:', address)
   return address
 }
 
@@ -77,7 +67,6 @@ export async function getConnectedAddress(): Promise<string | null> {
   }
 }
 
-// Core invoke function
 async function invoke(
   contractId: string,
   method: string,
@@ -87,10 +76,8 @@ async function invoke(
   ensureKit()
   const rpcServer = getRpc()
 
-  // 1. Get account
   const account = await rpcServer.getAccount(signerAddress)
 
-  // 2. Build transaction
   const tx = new TransactionBuilder(account, {
     fee: BASE_FEE,
     networkPassphrase: NETWORK_PASSPHRASE,
@@ -99,30 +86,20 @@ async function invoke(
     .setTimeout(30)
     .build()
 
-  console.log('[Stellar] Built transaction for', method)
-
-  // 3. Prepare (simulate + assemble)
   const preparedTx = await rpcServer.prepareTransaction(tx)
-
-  // 4. Convert to XDR
   const xdrBase64 = preparedTx.toXDR()
 
-  // 5. Sign with wallet
-  console.log('[Stellar] Requesting signature from wallet')
   const { signedTxXdr } = await StellarWalletsKit.signTransaction(xdrBase64, {
     networkPassphrase: NETWORK_PASSPHRASE,
     address: signerAddress,
   })
 
-  // 6. Submit
-  console.log('[Stellar] Submitting transaction')
   const submitted = await rpcServer.sendTransaction(signedTxXdr)
 
   if (submitted.status === 'ERROR') {
     throw new Error(`Submit error: ${JSON.stringify(submitted.errorResult)}`)
   }
 
-  // 7. Poll for confirmation
   const txHash = submitted.hash
 
   if (submitted.status === 'PENDING') {
@@ -146,7 +123,6 @@ async function invoke(
   return { txHash, result: null }
 }
 
-// Game functions
 export async function initializeGame({
   adminAddress,
   player2Address,
@@ -200,7 +176,6 @@ export async function recoverName({
   return invoke(contractId, 'recover_name', args, playerAddress)
 }
 
-// Helper functions
 function hexToBytes(hex: string): xdr.ScVal {
   const clean = hex.replace(/^0x/, '')
   return xdr.ScVal.scvBytes(Buffer.from(clean, 'hex'))
