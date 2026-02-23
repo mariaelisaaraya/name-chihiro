@@ -1,6 +1,8 @@
-# Instrucciones de Setup
+# Setup Instructions
 
-## Pasos Inmediatos Después del Deploy
+This document provides step-by-step instructions for setting up the project after deployment.
+
+## Immediate Steps After Deployment
 
 ### 1. Ejecutar Migración de Base de Datos
 

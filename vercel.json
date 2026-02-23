@@ -8,6 +8,10 @@
     "app/api/prove/route.ts": {
       "maxDuration": 300,
       "memory": 3008
+    },
+    "app/api/commit/route.ts": {
+      "maxDuration": 60,
+      "memory": 1024
     }
   }
 }

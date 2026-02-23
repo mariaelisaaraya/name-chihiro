@@ -1,5 +1,13 @@
--- Chihiro's Lost Name - Multiplayer Schema
--- Storage for game sessions with real-time capabilities
+-- Chihiro's Lost Name - Multiplayer Database Schema
+-- 
+-- This migration creates tables for multiplayer game sessions with real-time
+-- synchronization capabilities using Supabase Realtime.
+--
+-- Tables:
+--   - game_sessions: Main session data with TTL of 30 days
+--   - session_players: Player information and ready states
+--   - game_moves: Move history with optional zero-knowledge proofs
+--   - game_assets: Asset metadata for Supabase Storage references
 
 -- Enable necessary extensions
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";

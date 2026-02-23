@@ -8,7 +8,6 @@ const nextConfig: NextConfig = {
     },
   },
   webpack: (config) => {
-    // Handle wasm files
     config.experiments = {
       ...config.experiments,
       asyncWebAssembly: true,
@@ -16,7 +15,6 @@ const nextConfig: NextConfig = {
       layers: true,
     }
     
-    // Resolve fallbacks for node modules
     config.resolve.fallback = {
       ...config.resolve.fallback,
       fs: false,

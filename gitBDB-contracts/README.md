@@ -1,9 +1,12 @@
-# 🌊 Chihiro's Lost Name — gitBDB
-## Stellar Hacks: ZK Gaming — Integration Guide
+# Chihiro's Lost Name - Soroban Smart Contracts
 
----
+Zero-knowledge gaming on Stellar blockchain with Game Hub integration.
 
-## ✅ Hackathon Requirements Checklist
+## Overview
+
+This directory contains the Soroban smart contracts that power the on-chain verification and game state management for Chihiro's Lost Name.
+
+## Hackathon Requirements Checklist
 
 | Requirement | Status | Detail |
 |---|---|---|
