@@ -1,6 +1,5 @@
 import { createBrowserClient } from '@supabase/ssr'
 
-// Singleton pattern for Supabase client (Stellar Game Studio best practice)
 let supabaseClient: ReturnType<typeof createBrowserClient> | null = null
 
 export function getSupabaseClient() {
@@ -12,7 +11,7 @@ export function getSupabaseClient() {
   const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
 
   if (!supabaseUrl || !supabaseAnonKey) {
-    console.warn('[v0] Supabase not configured - multiplayer features disabled')
+    console.warn('Supabase not configured - multiplayer features disabled')
     return null
   }
 
@@ -21,7 +20,6 @@ export function getSupabaseClient() {
   return supabaseClient
 }
 
-// Type-safe database types (will be auto-generated later)
 export type Database = {
   public: {
     Tables: {
