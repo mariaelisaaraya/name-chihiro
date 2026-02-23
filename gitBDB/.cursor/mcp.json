@@ -1,0 +1,21 @@
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "."
+      ],
+      "description": "Read/write files in this project. Lets Cursor edit translation JSONs, contracts, circuits directly."
+    },
+    "stellar-mcp": {
+      "command": "npx",
+      "args": ["-y", "@mseep/stellar-mcp"],
+      "env": {
+        "STELLAR_SERVER_URL": "https://soroban-testnet.stellar.org"
+      },
+      "description": "Query Stellar testnet: check contract state, account balances, transaction history. Ask: 'check the Game Hub contract state' or 'what is the balance of this account'."
+    }
+  }
+}

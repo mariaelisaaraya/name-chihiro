@@ -1,0 +1,7 @@
+# Noir build artifacts
+target/
+
+# Inputs con secretos — NUNCA al repo
+Prover.toml
+*/Prover.toml
+proof.jsonno

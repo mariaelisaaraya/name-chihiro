@@ -1,0 +1,399 @@
+/* src/components/git-visualizer/GitVisualizer.css */
+
+.git-visualizer {
+  background: var(--vsc-panel-bg, #0C0C0C);
+  color: var(--vsc-text, #e5e7eb);
+  border-radius: 8px;
+  padding: 12px;
+  height: 480px;
+  display: flex;
+  flex-direction: column;
+  font-family: system-ui, sans-serif;
+}
+
+.git-visualizer__header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  gap: 12px;
+}
+
+.git-visualizer__title {
+  margin: 0;
+  font-size: 16px;
+  flex: 1;
+  font-weight: 600;
+}
+
+.git-visualizer__refresh-btn {
+  background: #22c55e;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 12px;
+  color: #fff;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.git-visualizer__refresh-btn:hover {
+  background: #16a34a;
+  transform: translateY(-1px);
+}
+
+.git-visualizer__content {
+  display: flex;
+  gap: 12px;
+  flex: 1;
+  overflow: hidden;
+}
+
+.git-visualizer__local,
+.git-visualizer__remote {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.git-visualizer__local {
+  border-right: 1px solid var(--vsc-border, #3c3c3c);
+}
+
+.git-visualizer__section-title {
+  margin: 0 0 10px 0;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Commit Graph */
+.commit-graph {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.commit-graph__branch-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.commit-graph__branch-label {
+  width: 90px;
+  text-align: right;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+.commit-graph__branch-label--active {
+  color: var(--vsc-text, #e5e7eb);
+  font-weight: 600;
+}
+
+.commit-graph__branch-label--inactive {
+  color: var(--vsc-muted, #9ca3af);
+}
+
+.commit-graph__commits {
+  flex: 1;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  overflow-x: auto;
+  padding: 4px 0;
+}
+
+.commit-graph__commit-group {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+/* Commit Node */
+.commit-node {
+  position: relative;
+  cursor: pointer;
+}
+
+.commit-node__circle {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  transition: all 0.2s;
+}
+
+.commit-node__circle:hover {
+  transform: scale(1.3);
+  box-shadow: 0 0 8px currentColor;
+}
+
+.commit-node__circle--head {
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4);
+}
+
+.commit-node__connector {
+  width: 18px;
+  height: 2px;
+  background: var(--vsc-border, #4b5563);
+}
+
+.commit-node__tooltip {
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1f2937;
+  color: #e5e7eb;
+  padding: 8px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  white-space: nowrap;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.commit-node:hover .commit-node__tooltip {
+  opacity: 1;
+}
+
+.commit-node__tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: #1f2937;
+}
+
+/* Branch Badge */
+.branch-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid transparent;
+}
+
+.branch-badge:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.branch-badge--active {
+  border-color: currentColor;
+  font-weight: 600;
+}
+
+.branch-badge__icon {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+}
+
+/* Remote Status */
+.remote-status {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 6px;
+  padding: 10px;
+  margin-bottom: 12px;
+  border-left: 3px solid transparent;
+}
+
+.remote-status--synced {
+  border-left-color: #22c55e;
+}
+
+.remote-status--ahead {
+  border-left-color: #3b82f6;
+}
+
+.remote-status--behind {
+  border-left-color: #f59e0b;
+}
+
+.remote-status--diverged {
+  border-left-color: #ef4444;
+}
+
+.remote-status__title {
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.remote-status__info {
+  font-size: 11px;
+  color: var(--vsc-muted, #9ca3af);
+  line-height: 1.4;
+}
+
+/* PR Card */
+.pr-card {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--vsc-border, #1f2937);
+  border-radius: 6px;
+  padding: 10px;
+  margin-bottom: 8px;
+  transition: all 0.2s;
+}
+
+.pr-card:hover {
+  border-color: var(--vsc-accent, #0e639c);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.pr-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.pr-card__title {
+  font-weight: 600;
+  font-size: 12px;
+  color: var(--vsc-text, #e5e7eb);
+}
+
+.pr-card__status {
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  font-weight: 600;
+  border: 1px solid;
+}
+
+.pr-card__status--open {
+  background: rgba(251, 191, 36, 0.2);
+  color: #facc15;
+  border-color: #facc15;
+}
+
+.pr-card__status--merged {
+  background: rgba(22, 163, 74, 0.2);
+  color: #4ade80;
+  border-color: #16a34a;
+}
+
+.pr-card__branches {
+  font-size: 11px;
+  color: var(--vsc-muted, #9ca3af);
+  margin-bottom: 6px;
+  font-family: var(--vsc-mono, monospace);
+}
+
+.pr-card__hint {
+  font-size: 10px;
+  color: #6b7280;
+  font-style: italic;
+}
+
+/* Empty State */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  text-align: center;
+  color: var(--vsc-muted, #9ca3af);
+  gap: 8px;
+}
+
+.empty-state__icon {
+  font-size: 32px;
+  opacity: 0.5;
+  margin-bottom: 4px;
+}
+
+.empty-state__title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--vsc-text, #e5e7eb);
+  margin: 0;
+}
+
+.empty-state__message {
+  font-size: 12px;
+  margin: 4px 0;
+  line-height: 1.5;
+}
+
+.empty-state__code {
+  background: rgba(0, 0, 0, 0.4);
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-family: var(--vsc-mono, monospace);
+  font-size: 11px;
+  color: #22c55e;
+  margin-top: 4px;
+}
+
+/* Animations */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.commit-node--new {
+  animation: slideIn 0.3s ease-out;
+}
+
+.branch-badge--new {
+  animation: slideIn 0.3s ease-out;
+}
+
+/* Scrollbar styling */
+.git-visualizer__local::-webkit-scrollbar,
+.git-visualizer__remote::-webkit-scrollbar {
+  width: 8px;
+}
+
+.git-visualizer__local::-webkit-scrollbar-track,
+.git-visualizer__remote::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.git-visualizer__local::-webkit-scrollbar-thumb,
+.git-visualizer__remote::-webkit-scrollbar-thumb {
+  background: var(--vsc-border, #3c3c3c);
+  border-radius: 4px;
+}
+
+.git-visualizer__local::-webkit-scrollbar-thumb:hover,
+.git-visualizer__remote::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

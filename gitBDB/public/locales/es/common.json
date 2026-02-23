@@ -1,0 +1,63 @@
+{
+  "langToggle": "EN",
+  "langName": "Español",
+
+  "appTitle": "🌊 Chihiro's Lost Name",
+  "appSubtitle": "⭐ Stellar Hacks: ZK Gaming · gitBDB",
+  "resetting": "Reiniciando...",
+  "activityNotFound": "Actividad no encontrada",
+  "activityNotFoundDesc": "No existe la actividad \"{{id}}\". Elegí una de la lista:",
+  "noActivity": "Sin actividad",
+
+  "homeTagline": "gitBDB · Entrenamiento Git & GitHub",
+  "homeTitle": "gitBDB — Git Simulator",
+  "homeSubtitle": "Simulador interactivo de Git & GitHub · ZK Gaming Edition",
+  "missionsAvailable": "misiones disponibles",
+  "featuredBadge": "⭐ Stellar Hacks: ZK Gaming",
+  "playBtn": "Jugar →",
+  "dividerLabel": "Actividades de Entrenamiento Git",
+  "homeFooter": "gitBDB · Git Simulator · Stellar Hacks: ZK Gaming Edition",
+  "showSolution": "Ver comandos solución",
+  "hideSolution": "Ocultar comandos solución",
+  "sampleCommands": "Comandos de ejemplo",
+  "copyBtn": "Copiar",
+  "copiedBtn": "✓ Copiado",
+
+  "missionsPanelTitle": "Misiones de práctica",
+  "missionsPanelDesc": "Leé la consigna de cada misión, ejecutá los comandos en la consola y presioná \"Validar misión\" para comprobar si la completaste.",
+  "validateBtn": "Validar misión",
+  "validating": "Validando...",
+  "statusCompleted": "Completada",
+  "statusErrors": "Con errores",
+  "statusPending": "Sin validar",
+  "missionSuccess": "¡Excelente! Esta misión está completa. 🎉",
+  "noValidator": "No hay validador disponible para esta misión.",
+
+  "chihiroTitle": "🌊 Chihiro's Lost Name",
+  "chihiroDesc": "Yubaba ha robado tu nombre. Para recuperarlo debes completar el ritual Git sagrado: crea la rama rescue/ y realiza 3 commits con mensajes exactos. Luego genera tu ZK proof y demuestra en la blockchain de Stellar que conocés tu nombre secreto — sin revelarlo.",
+
+  "m1Title": "🌿 Misión 1 – El Ritual de la Rama",
+  "m1Desc": "Yubaba te dice: \"Solo quien crea la rama rescue/ puede comenzar el ritual.\" Creá la rama rescue/chihiro con git checkout -b rescue/chihiro.",
+  "m1Hint": "git checkout -b rescue/chihiro",
+
+  "m2Title": "🕯️ Misión 2 – Las Tres Pistas",
+  "m2Desc": "El hechizo requiere exactamente 3 commits con mensajes \"clue:1\", \"clue:2\" y \"clue:3\" en la rama rescue/. Podés usar git commit --allow-empty -m \"clue:N\"",
+  "m2Hint": "git commit --allow-empty -m \"clue:1\"",
+
+  "m3Title": "🔮 Misión 3 – El Proof ZK",
+  "m3Desc": "Con el ritual completo, ingresá tu nombre secreto y salt para generar el ZK proof. El contrato en Stellar verificará que hash(secret+salt) == nameCommit sin revelar tu nombre.",
+  "m3Hint": "Usá el panel ZK Proof que aparece en la barra lateral",
+
+  "solutionComment": "# Ahora el botón ZK Proof se habilitará automáticamente",
+
+  "validM1NoB": "Creá la rama: git checkout -b rescue/chihiro",
+  "validM2NeedM1": "Completá la Misión 1 primero.",
+  "validM2Missing": "Faltan los commits: {{missing}}",
+  "validM2Hint": "Usá: git commit --allow-empty -m \"clue:1\"",
+  "validM3NotDone": "Generá el ZK proof desde el panel lateral para completar la misión.",
+  "validM1Ok": "✅ Rama \"{{branch}}\" creada. El ritual ha comenzado.",
+  "validM2Ok": "✅ Las tres pistas grabadas. El hechizo ZK puede comenzar.",
+  "validM3Ok": "✅ ZK Proof verificado on-chain. ¡Tu nombre ha sido recuperado!",
+
+  "seedReadme": "# 🌊 Chihiro's Lost Name\n\n## El Ritual de Recuperación\n\nYubaba ha robado tu nombre y lo ha encerrado en un commit hash.\nPara recuperarlo debes completar el **Ritual Git Sagrado**.\n\n### Pasos del Ritual\n\n1. Crea la rama `rescue/` sagrada\n2. Realiza 3 commits con los mensajes exactos: `clue:1`, `clue:2`, `clue:3`\n3. Genera tu **ZK Proof** que demuestre que conocés tu nombre\n\n### El Compromiso (nameCommit)\n\nTu nombre fue transformado en un hash:\n`nameCommit = Poseidon(nameSecret + salt)`\n\nSolo vos conocés el secreto. La blockchain verifica sin ver el nombre.\n\n---\n*\"Una vez que te robaron el nombre, solo el ritual puede devolverlo.\"*\n— Yubaba\n"
+}

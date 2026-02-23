@@ -1,0 +1,155 @@
+{
+  "welcome": "Welcome to Git Trainer",
+  "help": "Type \"help\" to see available commands.",
+  "catNotFound": "cat: file not found: {{file}}",
+  "unknown": "Unknown command: {{input}}\nType \"help\" to see available commands.",
+  "internalError": "Internal error processing git command.",
+  "gitHubError": "Internal error processing simulated GitHub command.",
+  "noPRs": "No simulated Pull Requests yet.",
+  "prList": "Simulated Pull Requests:",
+  "noRepoYet": "It looks like your repository has not been initialized yet.",
+  "gitUsage": "Usage: git <command>",
+  "addUsage": "Usage: git add <file>",
+  "checkoutUsage": "Usage: git checkout <branch-or-hash>",
+  "cloneUsage": "Usage: git clone <url>",
+  "remoteAddUsage": "Usage: git remote add <name> <url>",
+  "remoteRemoveUsage": "Usage: git remote remove <name>",
+  "remoteUsage": "Usage: git remote [-v | add | remove]",
+  "pagesUsage": "Usage: git pages [publish | republish]",
+  "githubCreateUsage": "Usage: github create <repo-name>",
+  "prCreateUsage": "Usage: github pr create <source-branch> [target-branch]",
+  "prMergeUsage": "Usage: github pr merge <id>",
+  "prIdMustBeNumber": "The PR id must be a number.",
+  "unknownGit": "Unknown git command: \"{{sub}}\". Use \"git help\" or \"help\" to see available commands.",
+  "blockedCommand": "Command \"{{cmd}}\" is not available in this activity.",
+  "addDotLine1": "This simulator does not use \"git add .\".",
+  "addDotLine2": "💡 Tip: add files one at a time, for example:",
+  "addDotLine3": "    git add index.html",
+  "addDotFiles": "Files available in /repo:",
+  "helpTitle": "Available commands:",
+  "helpHelp": "  help                        - Show this help",
+  "helpLs": "  ls                          - List files in /repo",
+  "helpCat": "  cat <file>                  - Show file contents",
+  "helpTouch": "  touch <file>                - Create an empty file",
+  "helpPwd": "  pwd                         - Show current directory",
+  "helpGitLocal": "Local Git:",
+  "helpInit": "  git init                    - Initialize a Git repo",
+  "helpStatus": "  git status                  - Show repo status",
+  "helpAdd": "  git add <file>              - Stage a file",
+  "helpCommit": "  git commit -m \"message\"     - Create a commit",
+  "helpLog": "  git log [branch]            - Show commit history",
+  "helpBranch": "  git branch                  - List branches",
+  "helpBranchNew": "  git branch <n>              - Create a new branch",
+  "helpCheckout": "  git checkout <branch|hash>  - Switch to branch or commit",
+  "helpMerge": "  git merge <branch>          - Merge branch into current",
+  "helpConflicts": "  git conflicts               - List files with merge conflict markers",
+  "helpGitRemote": "Remote Git:",
+  "helpRemote": "  git remote [-v]             - List configured remotes",
+  "helpRemoteAdd": "  git remote add <n> <url>    - Add a remote",
+  "helpRemoteRemove": "  git remote remove <n>       - Remove a remote",
+  "helpPush": "  git push origin <branch>    - Push commits to remote",
+  "helpPull": "  git pull origin <branch>    - Pull commits from remote",
+  "helpClone": "  git clone <url>             - Clone remote repository",
+  "helpPages": "GitHub Pages (simulated):",
+  "helpPagesPublish": "  git pages publish           - Publish site to Pages",
+  "helpPagesRepublish": "  git pages republish         - Update published site",
+  "helpGitHub": "Simulated GitHub:",
+  "helpGhCreate": "  github create <n>               - Create simulated remote repo",
+  "helpGhStatus": "  github status                   - Show simulated remote status",
+  "helpGhPrCreate": "  github pr create <from> [to]    - Create simulated Pull Request",
+  "helpGhPrList": "  github pr list                  - List simulated Pull Requests",
+  "helpGhPrMerge": "  github pr merge <id>            - Mark simulated PR as MERGED",
+  "hintInit": [
+    "git init creates the .git folder and starts tracking history for this project.",
+    "Use it only once when creating a new repository."
+  ],
+  "hintStatus": [
+    "git status shows which files changed and whether they are staged (ready to commit) or not.",
+    "Useful to review before running git add or git commit."
+  ],
+  "hintAdd": [
+    "git add stages files for the next commit.",
+    "Use it to choose which changes to include in a commit."
+  ],
+  "hintAddDot": [
+    "git add stages files for the next commit.",
+    "In real life you could use git add . for everything, but here we practice file by file 😉."
+  ],
+  "hintCommit": [
+    "git commit saves a snapshot of the staged files.",
+    "Choose clear messages so you remember what change was made in each commit."
+  ],
+  "hintLog": [
+    "git log shows the commit history.",
+    "You can use git log branch-name to see another branch."
+  ],
+  "hintBranchList": [
+    "git branch lists local branches.",
+    "Creating new branches lets you try things without breaking the main branch."
+  ],
+  "hintBranchCreate": [
+    "git branch <n> creates a new branch pointing to the current commit.",
+    "Good practice: one branch per feature or task."
+  ],
+  "hintCheckout": [
+    "git checkout switches the active branch.",
+    "Use it to move between versions of your project (e.g. main, feature/login, etc.)."
+  ],
+  "hintCheckoutCommit": [
+    "git checkout <hash> moves you to a specific commit (detached HEAD).",
+    "Useful to see how the project looked at that point in time.",
+    "To return to a branch: git checkout main"
+  ],
+  "hintMerge": [
+    "git merge integrates commits from another branch into the current branch.",
+    "If there are conflicts, resolve them in the files then run git add + git commit."
+  ],
+  "hintConflictsNone": [
+    "Conflicts occur when two branches modify the same part of a file.",
+    "If you ran git merge and see no conflicts, the merge may have been automatic."
+  ],
+  "hintConflicts": [
+    "git conflicts quickly locates files with merge conflict markers.",
+    "Combined with the editor, it guides you through resolving conflicts step by step."
+  ],
+  "hintPush": [
+    "git push sends your commits to a remote (e.g. GitHub).",
+    "This simulator uses a fake GitHub so you can practice without touching real repos."
+  ],
+  "hintPull": [
+    "git pull brings commits from the remote and merges them into your current branch.",
+    "Equivalent to: git fetch + git merge"
+  ],
+  "hintClone": [
+    "git clone copies a remote repository to your local machine.",
+    "The most common way to start working on an existing project."
+  ],
+  "hintRemoteAdd": [
+    "git remote add configures a remote repository.",
+    "Then you can push/pull to that remote."
+  ],
+  "hintRemoteRemove": [
+    "git remote remove deletes a remote configuration."
+  ],
+  "hintRemoteList": [
+    "git remote -v lists configured remotes.",
+    "Each remote has a fetch and push URL."
+  ],
+  "hintPages": [
+    "GitHub Pages lets you publish static websites from your repository.",
+    "Free and widely used for portfolios, documentation, and small projects."
+  ],
+  "hintPagesRepublish": [
+    "Republish updates your site with the latest changes.",
+    "In real GitHub, this happens automatically on each push."
+  ],
+  "conflictNoFiles": "No files with conflict markers (<<<<<<< ======= >>>>>>>) detected in /repo.",
+  "conflictFound": "Files with conflicts detected (searching <<<<<<<, =======, >>>>>>>):",
+  "conflictSteps": "Typical conflict resolution steps:",
+  "conflictStep1": "  1. Open the file in the editor.",
+  "conflictStep2": "  2. Choose which version to keep (or combine both) and delete the markers.",
+  "conflictStep3": "  3. Save the file.",
+  "conflictStep4": "  4. Run: git add <file>",
+  "conflictStep5": "  5. Then: git commit -m \"Resolve merge conflict\"",
+  "prListHeader": "Simulated Pull Requests:"
+}

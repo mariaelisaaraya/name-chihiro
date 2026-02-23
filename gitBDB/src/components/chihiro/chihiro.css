@@ -1,0 +1,998 @@
+/* src/components/chihiro/chihiro.css */
+/* Spirit World / Spirited Away Theme for "Chihiro's Lost Name" */
+
+/* ─── CSS Variables ─────────────────────────────────────────────────────────── */
+:root {
+  --spirit-bg: #0a0e1a;
+  --spirit-deep: #060a12;
+  --spirit-panel: rgba(8, 14, 30, 0.92);
+  --spirit-border: rgba(100, 180, 255, 0.2);
+  --spirit-border-glow: rgba(100, 180, 255, 0.5);
+  --spirit-text: #c8e0ff;
+  --spirit-muted: #6a8ab0;
+  --spirit-gold: #f0c060;
+  --spirit-gold-dim: rgba(240, 192, 96, 0.3);
+  --spirit-teal: #40c8c0;
+  --spirit-teal-dim: rgba(64, 200, 192, 0.2);
+  --spirit-purple: #9060e0;
+  --spirit-purple-dim: rgba(144, 96, 224, 0.2);
+  --spirit-green: #50d890;
+  --spirit-red: #e06060;
+  --spirit-water: #1a3a6a;
+}
+
+/* ─── ZK Panel Container ─────────────────────────────────────────────────────── */
+.zk-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  height: 100%;
+  overflow-y: auto;
+  font-family: 'Consolas', 'Cascadia Code', monospace;
+  font-size: 12px;
+  color: var(--spirit-text);
+  background: transparent;
+}
+
+.zk-panel::-webkit-scrollbar {
+  width: 4px;
+}
+.zk-panel::-webkit-scrollbar-track { background: transparent; }
+.zk-panel::-webkit-scrollbar-thumb {
+  background: var(--spirit-border);
+  border-radius: 2px;
+}
+
+/* ─── ZK Header ──────────────────────────────────────────────────────────────── */
+.zk-header {
+  border-bottom: 1px solid var(--spirit-border);
+  padding-bottom: 10px;
+}
+
+.zk-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.zk-icon { font-size: 16px; }
+
+.zk-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--spirit-gold);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.zk-badge {
+  margin-left: auto;
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+.zk-badge.complete {
+  background: rgba(80, 216, 144, 0.15);
+  border: 1px solid var(--spirit-green);
+  color: var(--spirit-green);
+}
+.zk-badge.pending {
+  background: rgba(240, 192, 96, 0.1);
+  border: 1px solid var(--spirit-gold-dim);
+  color: var(--spirit-gold);
+}
+
+.zk-subtitle {
+  font-size: 11px;
+  color: var(--spirit-muted);
+  margin: 0;
+}
+
+/* ─── ZK Sections ────────────────────────────────────────────────────────────── */
+.zk-section {
+  background: rgba(100, 160, 255, 0.04);
+  border: 1px solid var(--spirit-border);
+  border-radius: 6px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.zk-section-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--spirit-teal);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.zk-field {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.zk-field label {
+  font-size: 10px;
+  color: var(--spirit-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.zk-input {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--spirit-border);
+  border-radius: 4px;
+  padding: 5px 8px;
+  color: var(--spirit-text);
+  font-family: inherit;
+  font-size: 12px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.zk-input:focus {
+  border-color: var(--spirit-teal);
+  box-shadow: 0 0 0 2px var(--spirit-teal-dim);
+}
+.zk-input::placeholder { color: var(--spirit-muted); opacity: 0.6; }
+
+/* ─── Commit hash display ─────────────────────────────────────────────────────── */
+.zk-commit-hash {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--spirit-gold-dim);
+  border-radius: 4px;
+  padding: 5px 8px;
+  animation: fadeIn 0.3s ease;
+}
+.zk-commit-label {
+  font-size: 10px;
+  color: var(--spirit-gold);
+  flex-shrink: 0;
+}
+.zk-commit-hash code {
+  font-size: 11px;
+  color: var(--spirit-teal);
+  word-break: break-all;
+}
+
+/* ─── Toggle ───────────────────────────────────────────────────────────────────── */
+.zk-toggle label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 12px;
+  color: var(--spirit-text);
+}
+.zk-toggle input[type="checkbox"] {
+  accent-color: var(--spirit-teal);
+}
+
+.zk-hint {
+  font-size: 11px;
+  color: var(--spirit-muted);
+  margin: 0;
+  font-style: italic;
+}
+
+/* ─── Buttons ─────────────────────────────────────────────────────────────────── */
+.zk-btn {
+  border: none;
+  border-radius: 5px;
+  padding: 8px 14px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.zk-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.zk-btn-secondary {
+  background: var(--spirit-teal-dim);
+  border: 1px solid var(--spirit-teal);
+  color: var(--spirit-teal);
+}
+.zk-btn-secondary:hover:not(:disabled) {
+  background: rgba(64, 200, 192, 0.3);
+  box-shadow: 0 0 8px var(--spirit-teal-dim);
+}
+
+.zk-btn-primary {
+  background: linear-gradient(135deg, var(--spirit-purple), var(--spirit-teal));
+  border: 1px solid transparent;
+  color: white;
+  font-size: 13px;
+  padding: 10px 16px;
+}
+.zk-btn-primary:hover:not(:disabled) {
+  box-shadow: 0 0 16px var(--spirit-purple-dim), 0 0 16px var(--spirit-teal-dim);
+  transform: translateY(-1px);
+}
+
+.zk-btn-success {
+  background: linear-gradient(135deg, #2a8a50, #40d090) !important;
+  animation: pulse-green 2s infinite;
+}
+
+@keyframes pulse-green {
+  0%, 100% { box-shadow: 0 0 8px rgba(80, 216, 144, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(80, 216, 144, 0.6); }
+}
+
+/* ─── Loading spinner ─────────────────────────────────────────────────────────── */
+.zk-loading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.zk-spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ─── Warning / Error ─────────────────────────────────────────────────────────── */
+.zk-warning {
+  font-size: 11px;
+  color: var(--spirit-gold);
+  background: var(--spirit-gold-dim);
+  border: 1px solid rgba(240, 192, 96, 0.4);
+  border-radius: 4px;
+  padding: 6px 10px;
+  margin: 0;
+}
+
+.zk-error {
+  font-size: 11px;
+  color: var(--spirit-red);
+  background: rgba(224, 96, 96, 0.1);
+  border: 1px solid rgba(224, 96, 96, 0.4);
+  border-radius: 4px;
+  padding: 6px 10px;
+}
+
+/* ─── Logs ────────────────────────────────────────────────────────────────────── */
+.zk-logs {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--spirit-border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.zk-logs-title {
+  font-size: 10px;
+  color: var(--spirit-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--spirit-border);
+  background: rgba(0, 0, 0, 0.2);
+}
+.zk-log-line {
+  padding: 2px 10px;
+  font-size: 11px;
+  color: var(--spirit-text);
+  line-height: 1.6;
+}
+.zk-log-line:nth-child(even) { background: rgba(255,255,255,0.02); }
+
+/* ─── Success card ────────────────────────────────────────────────────────────── */
+.zk-success-card {
+  background: linear-gradient(135deg, rgba(80, 216, 144, 0.08), rgba(64, 200, 192, 0.08));
+  border: 1px solid var(--spirit-green);
+  border-radius: 8px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  animation: fadeIn 0.5s ease;
+}
+.zk-success-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--spirit-green);
+  text-align: center;
+}
+.zk-success-detail {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+}
+.zk-success-detail span { color: var(--spirit-muted); }
+.zk-success-detail code { color: var(--spirit-teal); }
+
+.zk-explorer-link {
+  color: var(--spirit-gold);
+  text-decoration: none;
+  font-size: 11px;
+  text-align: right;
+  display: block;
+}
+.zk-explorer-link:hover { text-decoration: underline; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Chihiro Sidebar Section (used by SideBar) ─────────────────────────────── */
+.chihiro-sidebar-section {
+  padding: 8px 0;
+  border-top: 1px solid var(--spirit-border);
+}
+.chihiro-sidebar-title {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--spirit-gold);
+  padding: 6px 16px;
+  font-weight: 700;
+}
+
+/* ─── Spirit World Background (injected on body when Chihiro activity is active) ── */
+.spirit-world-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Castle silhouette as CSS gradient art */
+.spirit-castle {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background:
+    /* Bathhouse towers */
+    radial-gradient(ellipse 10px 80px at 15% 100%, #0d1a2e 100%, transparent 100%),
+    radial-gradient(ellipse 6px 60px at 18% 100%, #0d1a2e 100%, transparent 100%),
+    radial-gradient(ellipse 12px 100px at 30% 100%, #0d1a2e 100%, transparent 100%),
+    radial-gradient(ellipse 8px 70px at 35% 100%, #0d1a2e 100%, transparent 100%),
+    radial-gradient(ellipse 15px 120px at 50% 100%, #0d1a2e 100%, transparent 100%),
+    radial-gradient(ellipse 10px 90px at 55% 100%, #0d1a2e 100%, transparent 100%),
+    radial-gradient(ellipse 12px 85px at 70% 100%, #0d1a2e 100%, transparent 100%),
+    radial-gradient(ellipse 8px 65px at 75% 100%, #0d1a2e 100%, transparent 100%),
+    radial-gradient(ellipse 10px 75px at 85% 100%, #0d1a2e 100%, transparent 100%),
+    /* Base structure */
+    linear-gradient(to top, #0d1a2e 60%, transparent 100%);
+  opacity: 0.8;
+}
+
+/* Animated water */
+.spirit-water {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 20%;
+  background: linear-gradient(180deg,
+    transparent 0%,
+    rgba(20, 60, 120, 0.4) 40%,
+    rgba(10, 30, 80, 0.8) 100%
+  );
+  animation: waterFlow 6s ease-in-out infinite;
+}
+
+@keyframes waterFlow {
+  0%, 100% { transform: scaleX(1) skewX(0deg); }
+  50% { transform: scaleX(1.02) skewX(0.5deg); }
+}
+
+/* Night sky gradient */
+.spirit-sky {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 30% 20%, rgba(30, 10, 60, 0.6) 0%, transparent 60%),
+              radial-gradient(ellipse at 80% 10%, rgba(10, 30, 80, 0.4) 0%, transparent 50%),
+              linear-gradient(180deg, #030510 0%, #070d1a 40%, #0a1520 100%);
+}
+
+/* Floating spirits (lantern-like orbs) */
+.spirit-orb {
+  position: absolute;
+  border-radius: 50%;
+  animation: floatOrb linear infinite;
+  filter: blur(1px);
+}
+
+.spirit-orb:nth-child(1) {
+  width: 6px; height: 6px;
+  background: rgba(240, 192, 96, 0.6);
+  left: 20%; top: 60%;
+  animation-duration: 12s;
+  box-shadow: 0 0 10px rgba(240, 192, 96, 0.4);
+}
+.spirit-orb:nth-child(2) {
+  width: 4px; height: 4px;
+  background: rgba(100, 180, 255, 0.5);
+  left: 60%; top: 40%;
+  animation-duration: 18s;
+  animation-delay: -6s;
+}
+.spirit-orb:nth-child(3) {
+  width: 5px; height: 5px;
+  background: rgba(200, 120, 255, 0.5);
+  left: 80%; top: 55%;
+  animation-duration: 15s;
+  animation-delay: -3s;
+}
+.spirit-orb:nth-child(4) {
+  width: 3px; height: 3px;
+  background: rgba(64, 200, 192, 0.6);
+  left: 40%; top: 70%;
+  animation-duration: 20s;
+  animation-delay: -9s;
+}
+.spirit-orb:nth-child(5) {
+  width: 7px; height: 7px;
+  background: rgba(240, 192, 96, 0.3);
+  left: 5%; top: 30%;
+  animation-duration: 25s;
+  animation-delay: -12s;
+}
+
+@keyframes floatOrb {
+  0% { transform: translate(0, 0) scale(1); opacity: 0; }
+  10% { opacity: 1; }
+  50% { transform: translate(-20px, -100px) scale(1.2); opacity: 0.8; }
+  90% { opacity: 1; }
+  100% { transform: translate(10px, -200px) scale(0.8); opacity: 0; }
+}
+
+/* Stars */
+.spirit-stars {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 10% 15%, rgba(200,220,255,0.8) 0%, transparent 100%),
+    radial-gradient(1px 1px at 25% 8%, rgba(200,220,255,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 45% 20%, rgba(200,220,255,0.9) 0%, transparent 100%),
+    radial-gradient(1px 1px at 60% 5%, rgba(200,220,255,0.7) 0%, transparent 100%),
+    radial-gradient(1px 1px at 75% 18%, rgba(200,220,255,0.8) 0%, transparent 100%),
+    radial-gradient(1px 1px at 90% 12%, rgba(200,220,255,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 15% 35%, rgba(200,220,255,0.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 35% 28%, rgba(200,220,255,0.7) 0%, transparent 100%),
+    radial-gradient(1px 1px at 55% 40%, rgba(200,220,255,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 85% 30%, rgba(200,220,255,0.6) 0%, transparent 100%),
+    radial-gradient(2px 2px at 50% 10%, rgba(255,240,200,0.9) 0%, transparent 100%),
+    radial-gradient(2px 2px at 20% 5%, rgba(255,240,200,0.8) 0%, transparent 100%);
+  animation: twinkle 4s ease-in-out infinite alternate;
+}
+@keyframes twinkle {
+  from { opacity: 0.7; }
+  to { opacity: 1; }
+}
+
+/* ─── Chihiro Activity specific overrides ───────────────────────────────────── */
+.activity-chihiro .vscode-app,
+.activity-chihiro {
+  background: transparent !important;
+}
+
+/* Make panels semi-transparent over spirit world bg */
+.activity-chihiro .vscode-sidebar,
+.activity-chihiro .vscode-editor,
+.activity-chihiro .vscode-bottompanel {
+  background: rgba(8, 14, 30, 0.85) !important;
+  backdrop-filter: blur(8px);
+}
+
+/* Status bar for Chihiro */
+.activity-chihiro .vscode-statusbar {
+  background: linear-gradient(90deg, #1a0a3a, #0a1a3a) !important;
+  border-top: 1px solid var(--spirit-border) !important;
+}
+
+/* Sidebar Chihiro branding */
+.chihiro-sidebar-header {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--spirit-border);
+  background: linear-gradient(135deg, rgba(30, 10, 60, 0.5), rgba(10, 30, 80, 0.5));
+}
+.chihiro-sidebar-logo {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--spirit-gold);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.chihiro-sidebar-sub {
+  font-size: 10px;
+  color: var(--spirit-muted);
+  margin-top: 2px;
+}
+
+/* ─── Ritual progress indicators ─────────────────────────────────────────────── */
+.ritual-progress {
+  padding: 10px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.ritual-step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--spirit-muted);
+}
+.ritual-step.done { color: var(--spirit-green); }
+.ritual-step.active { color: var(--spirit-teal); }
+.ritual-step-icon { font-size: 12px; flex-shrink: 0; }
+
+/* ─── Role Selector ─────────────────────────────────────────────────────────── */
+.role-selector {
+  padding: 8px 0;
+}
+.role-selector-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--spirit-gold);
+  margin-bottom: 4px;
+}
+.role-selector-sub {
+  font-size: 11px;
+  color: var(--spirit-muted);
+  margin: 0 0 12px;
+}
+.role-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.role-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 8px;
+  border-radius: 8px;
+  border: 1px solid var(--spirit-border);
+  background: rgba(0,0,0,0.3);
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+  text-align: center;
+}
+.role-card:hover { transform: translateY(-2px); }
+.role-admin:hover { border-color: var(--spirit-gold); box-shadow: 0 0 12px var(--spirit-gold-dim); }
+.role-player:hover { border-color: var(--spirit-teal); box-shadow: 0 0 12px var(--spirit-teal-dim); }
+.role-icon { font-size: 22px; }
+.role-name { font-size: 12px; font-weight: 700; color: var(--spirit-text); }
+.role-desc { font-size: 10px; color: var(--spirit-muted); line-height: 1.5; }
+
+/* ─── Role back button ───────────────────────────────────────────────────────── */
+.role-back-btn {
+  background: transparent;
+  border: none;
+  color: var(--spirit-muted);
+  cursor: pointer;
+  font-size: 10px;
+  padding: 2px 0;
+  font-family: inherit;
+  margin-top: 2px;
+}
+.role-back-btn:hover { color: var(--spirit-teal); }
+
+/* ─── Role panel ─────────────────────────────────────────────────────────────── */
+.role-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  animation: fadeIn 0.25s ease;
+}
+
+/* ─── Wallet UI ──────────────────────────────────────────────────────────────── */
+.wallet-btn {
+  width: 100%;
+  padding: 8px 12px;
+  background: rgba(100,180,255,0.06);
+  border: 1px solid var(--spirit-border);
+  border-radius: 5px;
+  color: var(--spirit-teal);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.wallet-btn:hover {
+  background: var(--spirit-teal-dim);
+  border-color: var(--spirit-teal);
+}
+.wallet-btn-loading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+  padding: 8px 12px;
+  background: rgba(100,180,255,0.04);
+  border: 1px solid var(--spirit-border);
+  border-radius: 5px;
+  color: var(--spirit-muted);
+  font-size: 12px;
+}
+.wallet-connected {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  background: rgba(80,216,144,0.06);
+  border: 1px solid rgba(80,216,144,0.3);
+  border-radius: 5px;
+}
+.wallet-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--spirit-green);
+  box-shadow: 0 0 6px var(--spirit-green);
+  flex-shrink: 0;
+}
+.wallet-addr {
+  font-size: 12px;
+  color: var(--spirit-green);
+  font-family: inherit;
+  flex: 1;
+}
+.wallet-disconnect {
+  background: transparent;
+  border: none;
+  color: var(--spirit-muted);
+  cursor: pointer;
+  font-size: 12px;
+  padding: 0 2px;
+  line-height: 1;
+}
+.wallet-disconnect:hover { color: var(--spirit-red); }
+
+/* ─── Ritual status bar ──────────────────────────────────────────────────────── */
+.ritual-status-bar {
+  padding: 7px 10px;
+  border-radius: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  text-align: center;
+}
+.ritual-status-bar.complete {
+  background: rgba(80,216,144,0.08);
+  border: 1px solid rgba(80,216,144,0.3);
+  color: var(--spirit-green);
+}
+.ritual-status-bar.pending {
+  background: rgba(240,192,96,0.06);
+  border: 1px solid rgba(240,192,96,0.25);
+  color: var(--spirit-gold);
+}
+
+/* ─── Wallet header bar (shared, above role selector) ───────────────────────── */
+.wallet-header-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0 6px;
+  margin-top: 8px;
+  border-top: 1px solid rgba(100,180,255,0.1);
+}
+.wallet-header-left {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+}
+.wallet-header-right {
+  flex-shrink: 0;
+}
+
+/* Network badge */
+.wallet-network-badge {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  padding: 2px 7px;
+  border-radius: 3px;
+  border: 1px solid rgba(64,200,192,0.35);
+  color: rgba(64,200,192,0.8);
+  background: rgba(64,200,192,0.06);
+  text-transform: uppercase;
+  font-family: inherit;
+}
+
+/* Freighter missing state */
+.wallet-missing {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+}
+.wallet-missing-text {
+  color: rgba(240,192,96,0.7);
+}
+.wallet-install-link {
+  color: var(--spirit-teal);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 11px;
+}
+.wallet-install-link:hover { text-decoration: underline; }
+
+/* walletError bar */
+.wallet-error-bar {
+  width: 100%;
+  padding: 6px 10px;
+  background: rgba(224,96,96,0.08);
+  border: 1px solid rgba(224,96,96,0.3);
+  border-radius: 4px;
+  color: #e08080;
+  font-size: 11px;
+  line-height: 1.5;
+  margin-top: 2px;
+}
+.wallet-error-hint {
+  color: rgba(224,96,96,0.75);
+  font-style: italic;
+}
+
+/* Localhost / popup hint — shown while connecting */
+.wallet-localhost-hint {
+  width: 100%;
+  padding: 5px 9px;
+  background: rgba(240,192,96,0.05);
+  border: 1px solid rgba(240,192,96,0.2);
+  border-radius: 4px;
+  color: rgba(240,192,96,0.65);
+  font-size: 10px;
+  line-height: 1.55;
+  margin-top: 2px;
+}
+
+/* ─── RitualStepper ──────────────────────────────────────────────────────────── */
+.ritual-stepper {
+  display: flex;
+  align-items: center;
+  padding: 10px 12px 8px;
+  gap: 0;
+  border-bottom: 1px solid rgba(100,180,255,0.1);
+  margin-bottom: 2px;
+}
+.stepper-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  min-width: 0;
+  flex: 1;
+}
+.stepper-dot {
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px;
+  border: 1.5px solid rgba(100,180,255,0.2);
+  background: rgba(10,20,50,0.6);
+  transition: all 0.2s;
+}
+.stepper-step.done .stepper-dot {
+  background: rgba(80,216,144,0.15);
+  border-color: rgba(80,216,144,0.6);
+  color: #50d890;
+  font-size: 11px;
+  font-weight: 700;
+}
+.stepper-step.current .stepper-dot {
+  background: rgba(240,192,96,0.12);
+  border-color: rgba(240,192,96,0.6);
+  box-shadow: 0 0 6px rgba(240,192,96,0.3);
+}
+.stepper-step.pending .stepper-dot {
+  opacity: 0.35;
+}
+.stepper-label {
+  font-size: 9px;
+  text-align: center;
+  letter-spacing: 0.3px;
+  max-width: 52px;
+  line-height: 1.3;
+}
+.stepper-step.done    .stepper-label { color: rgba(80,216,144,0.8); }
+.stepper-step.current .stepper-label { color: rgba(240,192,96,0.9); }
+.stepper-step.pending .stepper-label { color: rgba(150,180,220,0.35); }
+.stepper-line {
+  flex: 1;
+  height: 1.5px;
+  background: rgba(100,180,255,0.15);
+  margin: 0 2px;
+  margin-bottom: 14px; /* align with dot centers */
+  transition: background 0.2s;
+}
+.stepper-line.done { background: rgba(80,216,144,0.4); }
+
+/* ─── Wallet header bar ──────────────────────────────────────────────────────── */
+.wallet-header-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px 0 4px;
+  margin-top: 8px;
+  border-top: 1px solid rgba(100,180,255,0.1);
+}
+.wallet-header-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.wallet-header-left  { flex: 1; min-width: 0; }
+.wallet-header-right { flex-shrink: 0; display: flex; align-items: center; gap: 6px; }
+
+/* Network badge */
+.wallet-network-badge {
+  font-size: 9px; font-weight: 700; letter-spacing: 1.5px;
+  padding: 2px 7px; border-radius: 3px;
+  border: 1px solid rgba(64,200,192,0.35);
+  color: rgba(64,200,192,0.8);
+  background: rgba(64,200,192,0.06);
+}
+/* 🔓 unlock shortcut */
+.wallet-unlock-link {
+  font-size: 13px; text-decoration: none; opacity: 0.55;
+  line-height: 1;
+  transition: opacity 0.15s;
+}
+.wallet-unlock-link:hover { opacity: 1; }
+
+/* Freighter missing */
+.wallet-missing {
+  display: flex; align-items: center; gap: 6px; font-size: 11px;
+}
+.wallet-missing-text { color: rgba(240,192,96,0.7); }
+.wallet-install-link { color: var(--spirit-teal); text-decoration: none; font-weight: 600; font-size: 11px; }
+.wallet-install-link:hover { text-decoration: underline; }
+
+/* Localhost hint */
+.wallet-localhost-hint {
+  padding: 5px 9px;
+  background: rgba(240,192,96,0.05);
+  border: 1px solid rgba(240,192,96,0.2);
+  border-radius: 4px;
+  color: rgba(240,192,96,0.65);
+  font-size: 10px; line-height: 1.55;
+}
+
+/* Error bar with retry */
+.wallet-error-bar {
+  padding: 7px 10px;
+  background: rgba(224,96,96,0.08);
+  border: 1px solid rgba(224,96,96,0.3);
+  border-radius: 4px;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.wallet-error-msg  { color: #e08080; font-size: 11px; line-height: 1.5; }
+.wallet-error-hint { color: rgba(224,96,96,0.7); font-style: italic; }
+.wallet-error-actions {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+}
+.wallet-retry-btn {
+  background: rgba(240,192,96,0.1);
+  border: 1px solid rgba(240,192,96,0.35);
+  color: rgba(240,192,96,0.9);
+  border-radius: 4px; padding: 3px 10px;
+  font-size: 11px; font-weight: 600; cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s;
+}
+.wallet-retry-btn:hover { background: rgba(240,192,96,0.18); }
+.wallet-open-link {
+  color: var(--spirit-teal); font-size: 11px; font-weight: 600;
+  text-decoration: none;
+}
+.wallet-open-link:hover { text-decoration: underline; }
+
+/* Mock proof badge */
+.mock-proof-badge {
+  text-align: center; font-size: 9px; letter-spacing: 0.5px;
+  color: rgba(150,180,220,0.4);
+  padding: 3px 0;
+  border-top: 1px dashed rgba(100,150,200,0.15);
+  margin-top: -2px;
+}
+
+/* ─── Server status badge ────────────────────────────────────────────────────── */
+.server-status-badge {
+  font-size: 10px; padding: 3px 8px; border-radius: 3px;
+  margin-bottom: 6px; font-weight: 500;
+}
+.server-status-badge.online  { background: rgba(80,216,144,0.08); border: 1px solid rgba(80,216,144,0.3); color: rgba(80,216,144,0.9); }
+.server-status-badge.offline { background: rgba(240,192,96,0.06); border: 1px solid rgba(240,192,96,0.25); color: rgba(240,192,96,0.7); }
+
+/* ─── Proof mode tabs ────────────────────────────────────────────────────────── */
+.proof-mode-tabs {
+  display: flex; gap: 4px; margin-bottom: 10px; flex-wrap: wrap;
+}
+.proof-mode-tab {
+  padding: 4px 10px; border-radius: 4px; font-size: 11px;
+  border: 1px solid rgba(100,180,255,0.2);
+  background: rgba(10,20,50,0.5);
+  color: rgba(150,180,220,0.7); cursor: pointer; font-family: inherit;
+  transition: all 0.15s;
+}
+.proof-mode-tab:hover:not(:disabled) {
+  border-color: rgba(100,180,255,0.4); color: rgba(200,220,255,0.9);
+}
+.proof-mode-tab.active {
+  background: rgba(100,180,255,0.12);
+  border-color: rgba(100,180,255,0.5);
+  color: rgba(200,220,255,1);
+}
+.proof-mode-tab:disabled { opacity: 0.3; cursor: not-allowed; }
+
+/* ─── Proof loaded badge ─────────────────────────────────────────────────────── */
+.proof-loaded-badge {
+  padding: 6px 10px; margin-top: 8px;
+  background: rgba(80,216,144,0.06);
+  border: 1px solid rgba(80,216,144,0.25);
+  border-radius: 4px; font-size: 10px;
+  color: rgba(80,216,144,0.85); line-height: 1.6;
+}
+.proof-loaded-badge code { color: rgba(80,216,144,0.7); font-size: 10px; }
+
+/* ─── Method label ────────────────────────────────────────────────────────────── */
+.zk-method-label {
+  font-size: 10px; padding: 5px 8px; margin-bottom: 8px;
+  background: rgba(100,180,255,0.04);
+  border: 1px solid rgba(100,180,255,0.15); border-radius: 4px;
+  color: rgba(150,200,255,0.7);
+}
+
+/* ─── Monospaced input (hex fields) ─────────────────────────────────────────── */
+.zk-input-mono { font-family: "Courier New", monospace; font-size: 11px; letter-spacing: 0.3px; }
+
+/* ─── Proof file zone ────────────────────────────────────────────────────────── */
+.proof-file-zone { display: flex; flex-direction: column; gap: 4px; }
+
+/* ─── Admin wallet hint ──────────────────────────────────────────────────────── */
+.admin-wallet-hint { color: rgba(240,192,96,0.7); font-size: 11px; }
+
+/* ─── ServerStatus ───────────────────────────────────────────────────────────── */
+.server-status {
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 10px;
+  letter-spacing: 0.3px;
+  margin: 6px 0 4px;
+  display: flex; align-items: center; gap: 6px;
+}
+.server-status.ok      { background: rgba(80,216,144,0.07); border: 1px solid rgba(80,216,144,0.25); color: rgba(80,216,144,0.8); }
+.server-status.offline { background: rgba(224,96,96,0.07);  border: 1px solid rgba(224,96,96,0.2);  color: rgba(224,96,96,0.7); }
+.server-status.checking{ background: rgba(100,160,220,0.07); border: 1px solid rgba(100,160,220,0.2); color: rgba(100,160,220,0.6); }
+
+/* ─── ProofUploader ──────────────────────────────────────────────────────────── */
+.proof-uploader {
+  padding: 10px 12px;
+  background: rgba(100,160,220,0.05);
+  border: 1px dashed rgba(100,160,220,0.25);
+  border-radius: 6px;
+  margin-top: 8px;
+}
+.proof-uploader-title { font-size: 11px; font-weight: 600; color: rgba(180,210,255,0.8); margin-bottom: 2px; }

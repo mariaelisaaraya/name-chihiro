@@ -1,0 +1,10 @@
+# Compilar con: nargo 1.0.0-beta.16
+# Instalar:    noirup -v 1.0.0-beta.16
+[package]
+name = "chihiro_name"
+type = "bin"
+authors = ["gitBDB"]
+compiler_version = ">=0.36.0"
+
+[dependencies]
+# std is included automatically by Noir

@@ -1,0 +1,619 @@
+/* Import theme variables */
+@import "../theme/theme.css";
+
+.vscode-app {
+  color: var(--vsc-text);
+  background: var(--vsc-bg);
+  height: 100vh;
+  height: 100dvh; /* dynamic viewport height — fixes mobile browser chrome overlap */
+  width: 100vw;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+}
+
+.vscode-grid {
+  display: grid;
+  grid-template-columns: 48px 280px 4px 1fr;
+  grid-template-rows: 1fr auto auto 24px;
+  height: 100%;
+  width: 100%;
+  background: var(--vsc-bg);
+  min-width: 0;
+  min-height: 0;
+}
+
+.vscode-grid > * {
+  min-width: 0;
+  min-height: 0;
+}
+
+.vscode-grid > * {
+  min-width: 0;
+  min-height: 0;
+}
+
+
+.vscode-activitybar {
+  grid-row: 1 / 4;
+  grid-column: 1;
+  width: 48px;
+  min-width: 48px;
+  max-width: 48px;
+  background: var(--vsc-activitybar-bg);
+  border-right: 1px solid var(--vsc-border);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.activity-bar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  height: 100%;
+  width: 100%;
+  gap: 0;
+  padding: 8px 0;
+}
+
+.activity-bar-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border: none;
+  background: transparent;
+  color: var(--vsc-muted);
+  cursor: pointer;
+  outline: none;
+  transition: background 0.15s, color 0.15s;
+}
+
+.activity-bar-icon:hover:not(.is-active) {
+  background: var(--vsc-hover-bg);
+  color: var(--vsc-text);
+}
+
+.activity-bar-icon.is-active {
+  color: var(--vsc-text);
+  background: var(--vsc-active-bg);
+}
+
+.activity-bar-indicator {
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 3px;
+  border-radius: 2px;
+  background: var(--vsc-accent);
+  box-shadow: 0 0 4px 0 var(--vsc-accent);
+}
+
+.activity-bar-emoji {
+  font-size: 22px;
+  pointer-events: none;
+}
+
+/* Activity Bar Icon States */
+.activity-bar-icon {
+  transition: background-color 0.15s cubic-bezier(0.2, 0, 0, 1),
+              transform 0.15s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.activity-bar-icon:hover:not(.is-active) {
+  background: var(--vsc-hover-bg) !important;
+  color: var(--vsc-text);
+}
+
+.activity-bar-icon:active {
+  transform: scale(0.95);
+}
+
+.activity-bar-icon:focus-visible {
+  outline: 2px solid var(--vsc-focus-border);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .activity-bar-icon {
+    transition: none !important;
+  }
+}
+
+.vscode-sidebar {
+  grid-row: 1;
+  grid-column: 2;
+  background: var(--vsc-sidebar-bg);
+  border-right: 1px solid var(--vsc-border);
+  overflow: hidden;
+  min-width: 0;
+  min-height: 0;
+}
+
+.vscode-resize-handle {
+  grid-row: 1;
+  grid-column: 3;
+  width: 4px;
+  cursor: col-resize;
+  background: transparent;
+  position: relative;
+  z-index: 2;
+}
+
+.vscode-resize-handle:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.vscode-editor {
+  grid-row: 1;
+  grid-column: 4;
+  background: var(--vsc-editor-bg);
+  overflow: auto;
+  min-width: 0;
+  min-height: 0;
+}
+
+.vscode-bottompanel {
+  grid-row: 3;
+  grid-column: 2 / 5;
+  background: var(--vsc-bottompanel-bg);
+  border-top: 1px solid var(--vsc-border);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.vscode-statusbar {
+  grid-row: 4;
+  grid-column: 1 / 5;
+  height: 24px;
+  background: var(--vsc-statusbar-bg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  color: #ffffff;
+}
+
+.vscode-placeholder {
+  padding: 16px;
+  color: var(--vsc-text);
+}
+
+.status-left, .status-right {
+  font-size: 12px;
+}
+
+/* Bottom panel styles */
+.vscode-bottompanel .panel-surface {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+.panel-tabbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 34px;
+  padding: 0 12px;
+  border-bottom: 1px solid var(--vsc-border);
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06));
+}
+
+.panel-tab {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 6px;
+  border: none;
+  background: transparent;
+  color: var(--vsc-muted);
+  font-size: 12px;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.panel-tab:hover {
+  color: var(--vsc-text);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.panel-tab.is-active {
+  color: var(--vsc-text);
+  font-weight: 600;
+}
+
+.panel-tab.is-active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -8px;
+  height: 2px;
+  background: var(--vsc-accent);
+  border-radius: 999px;
+}
+
+.panel-content {
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  overflow: auto;
+  padding: 10px 12px;
+  background: var(--vsc-panel-bg);
+  color: var(--vsc-text);
+  font-family: var(--vsc-mono);
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+
+.panel-content::-webkit-scrollbar {
+  width: 10px;
+}
+
+.panel-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.panel-content::-webkit-scrollbar-thumb {
+  background: var(--vsc-border);
+  border-radius: 6px;
+}
+
+.panel-content::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.panel-empty {
+  color: var(--vsc-muted);
+  font-family: var(--vsc-mono);
+}
+
+/* Horizontal resize handle */
+.vscode-horizontal-resize-handle {
+  grid-row: 2;
+  grid-column: 2 / 5;
+  height: 4px;
+  cursor: row-resize;
+  background: transparent;
+  position: relative;
+  z-index: 10;
+  transition: background-color 0.15s ease;
+}
+
+.vscode-horizontal-resize-handle:hover {
+  background: var(--vsc-border);
+}
+
+.vscode-horizontal-resize-handle:active {
+  background: var(--vsc-accent);
+}
+
+/* Terminal styles */
+.terminal-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  font-family: var(--vsc-mono);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--vsc-text);
+  background: var(--vsc-panel-bg);
+  padding: 8px 12px;
+}
+
+.terminal-log {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  min-height: 0;
+  margin-bottom: 8px;
+  padding: 4px;
+}
+
+.terminal-log::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.terminal-log::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.terminal-log::-webkit-scrollbar-thumb {
+  background: rgba(121, 121, 121, 0.4);
+  border-radius: 6px;
+}
+
+.terminal-log::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 100, 100, 0.7);
+}
+
+.terminal-line {
+  margin: 0;
+  padding: 1px 0;
+}
+
+.terminal-hint {
+  margin-bottom: 6px;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  background: rgba(58, 130, 246, 0.12);
+  color: var(--vsc-text);
+  border: 1px solid rgba(58, 130, 246, 0.3);
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.terminal-hint-icon {
+  flex-shrink: 0;
+}
+
+.terminal-hint-text {
+  display: inline;
+  white-space: pre-wrap;
+  font-family: inherit;
+  margin: 0;
+  flex: 1;
+}
+
+.terminal-input-form {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 0;
+  border-top: 1px solid transparent;
+}
+
+.terminal-prompt {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  font-family: var(--vsc-mono);
+  font-size: 13px;
+  user-select: none;
+}
+
+.terminal-prompt-user {
+  color: #3CF253;
+}
+
+.terminal-prompt-mingw {
+  color: #C586C0;
+}
+
+.terminal-prompt-path {
+  color: #E3BF5F;
+}
+
+.terminal-prompt-branch {
+  color: #3CF253;
+}
+
+.terminal-prompt-dollar {
+  color: #FFFFFF;
+}
+
+.terminal-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--vsc-text);
+  font-family: var(--vsc-mono);
+  font-size: 13px;
+  padding-left: 4px;
+  min-width: 0;
+}
+
+.terminal-input::placeholder {
+  color: var(--vsc-muted);
+}
+
+/* Animación para cambio de paneles en SideBar */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.sidebar-panel-content {
+  animation: fadeIn 0.18s cubic-bezier(0.2, 0, 0, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  .sidebar-panel-content {
+    animation-duration: 0.05s;
+  }
+}
+
+/* ─── RESPONSIVE / MOBILE ───────────────────────────────────────────────────────
+   Breakpoints:
+   · < 768px  → mobile: single column, bottom nav tabs
+   · 768–1024 → tablet: sidebar collapsible, narrower default
+   · > 1024px → desktop: full IDE layout
+   ─────────────────────────────────────────────────────────────────────────────── */
+
+@media (max-width: 767px) {
+  /* Stack everything vertically */
+  .vscode-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100dvh !important; /* dvh = dynamic viewport height, handles mobile browser chrome */
+    overflow: hidden;
+  }
+
+  /* Hide activity bar on mobile (replaced by bottom tabs) */
+  .vscode-activitybar {
+    display: none !important;
+  }
+
+  /* Hide sidebar drag handle on mobile */
+  .vscode-resize-handle,
+  .vscode-horizontal-resize-handle {
+    display: none !important;
+  }
+
+  /* Sidebar becomes a full-width top panel */
+  .vscode-sidebar {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-height: 45vh;
+    overflow-y: auto;
+    border-right: none !important;
+    border-bottom: 1px solid var(--vsc-border);
+    order: 1;
+  }
+
+  /* Editor takes remaining space */
+  .vscode-editor {
+    flex: 1 !important;
+    min-height: 0 !important;
+    order: 2;
+    overflow: hidden;
+  }
+
+  /* Terminal panel: fixed height on mobile */
+  .vscode-bottompanel {
+    height: 200px !important;
+    max-height: 200px !important;
+    order: 3;
+    overflow: hidden;
+  }
+
+  /* Status bar stays at bottom */
+  .vscode-statusbar {
+    order: 4;
+    flex-shrink: 0;
+  }
+
+  /* Larger touch targets for buttons */
+  .activity-bar-icon {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Tablet: narrower sidebar, smaller fonts */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .vscode-grid {
+    grid-template-columns: 40px 220px 4px 1fr !important;
+  }
+
+  .vscode-activitybar {
+    width: 40px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
+  }
+
+  .activity-bar-icon {
+    width: 40px !important;
+    height: 44px !important;
+  }
+}
+
+/* Mobile: touch-friendly ZK panel */
+@media (max-width: 767px) {
+  .zk-panel {
+    padding: 12px !important;
+    gap: 10px !important;
+  }
+
+  .role-cards {
+    flex-direction: column !important;
+  }
+
+  .zk-input {
+    font-size: 16px !important; /* prevents iOS zoom on input focus */
+    padding: 10px 12px !important;
+  }
+
+  .zk-btn {
+    padding: 12px 16px !important;
+    font-size: 13px !important;
+    min-height: 44px; /* Apple HIG minimum touch target */
+  }
+
+  .wallet-btn {
+    min-height: 44px;
+    font-size: 13px !important;
+  }
+}
+
+/* ─── MOBILE BOTTOM NAV ─────────────────────────────────────────────────────── */
+.mobile-bottom-nav {
+  display: none; /* hidden on desktop */
+}
+
+@media (max-width: 767px) {
+  .mobile-bottom-nav {
+    display: flex !important;
+    flex-direction: row;
+    align-items: stretch;
+    background: var(--vsc-activitybar-bg);
+    border-top: 1px solid var(--vsc-border);
+    order: 5;
+    flex-shrink: 0;
+    z-index: 10;
+  }
+
+  .mobile-nav-btn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 0 8px;
+    border: none;
+    background: transparent;
+    color: var(--vsc-muted);
+    cursor: pointer;
+    font-family: inherit;
+    min-height: 52px; /* Apple HIG safe touch target */
+    transition: background 0.15s, color 0.15s;
+  }
+
+  .mobile-nav-btn.is-active {
+    color: var(--vsc-text);
+    background: var(--vsc-active-bg);
+    border-top: 2px solid var(--vsc-accent);
+  }
+
+  .mobile-nav-btn:active {
+    background: var(--vsc-hover-bg);
+  }
+}

@@ -1,0 +1,120 @@
+# Chihiro's Lost Name — gitBDB
+# Cursor AI Rules — read this before suggesting any code change
+
+## What this project is
+A ZK gaming hackathon entry (Stellar Hacks) that doubles as a Git education tool.
+- Frontend: React 19 + Vite 7 + TypeScript (some files) + plain JSX
+- Smart contract: Soroban (Rust) in `../gitBDB-contracts/`
+- ZK circuit: Noir (UltraHonk) in `../gitBDB-circuits/`
+- Git runs IN THE BROWSER via isomorphic-git + Lightning FS (no real git installed needed)
+
+## Architecture decisions — don't change these without asking
+
+### i18n
+- Uses react-i18next with 3 namespaces: `common`, `terminal`, `zk`
+- Translation files: `public/locales/es/` and `public/locales/en/`
+- Non-React modules use `src/i18n/getLang.js` (uses i18next instance directly)
+- Language auto-detected from browser, stored in localStorage key `gitbdb-lang`
+- NEVER hardcode user-facing strings in Spanish or English — always use `t("key")`
+
+### Stellar / Wallets
+- Wallets Kit v2 API is STATIC: `StellarWalletsKit.init()` / `StellarWalletsKit.signTransaction()`
+  NOT instance-based (v1 was `new StellarWalletsKit({...})`)
+- Package is `@creit-tech/stellar-wallets-kit` (JSR, with dash) NOT `@creit.tech` (npm, deprecated)
+- RPC imports: `import { Server, assembleTransaction } from "@stellar/stellar-sdk/rpc"` (subpath)
+  NOT `import { SorobanRpc } from "@stellar/stellar-sdk"` (namespace, deprecated)
+- Use `prepareTransaction()` pattern (simulate + assemble in one step)
+- Recommended wallet: Freighter (Chrome/Firefox extension, free, most widely used on Stellar)
+
+### ZK Proofs
+- Current `generateZKProof()` in ChihiroZKPanel.jsx is a MOCK (random bytes)
+- Real implementation needs: Noir circuit compiled + @noir-lang/backend_barretenberg
+- Poseidon2 hash is also mocked with SHA-256 — replace with actual Poseidon2 from barretenberg
+- Protocol 25 "X-Ray" on Stellar testnet has native BN254 + Poseidon2 host functions
+
+### Game Hub Contract
+- Fixed address: `CB4VZAT2U3UC6XFK3N23SKRF2NDCMP3QHJYMCHHFMZO7MRQO6DQ2EMYG`
+- `start_game(player1, player2)` called by Admin panel → returns game_id
+- `end_game(game_id, player2)` called by Player panel → player2 wins
+- This is REQUIRED by hackathon rules — don't remove these calls
+
+### React patterns
+- useCallback on all event handlers that get passed to child components
+- t() from useTranslation passed as prop to inner components (not called via hook in each)
+- No class components, no Redux — useState + useCallback + useContext only
+- React.memo on MissionsPanel (expensive re-renders)
+
+## File structure
+```
+src/
+  i18n/
+    i18n.js           ← react-i18next config + inline resources
+    getLang.js        ← t() for non-React modules (auto-detects namespace from key prefix)
+    LanguageContext.jsx ← DEPRECATED, kept for reference only
+    translations.js    ← DEPRECATED, kept for reference only
+  components/chihiro/
+    ChihiroZKPanel.jsx  ← main ZK UI (Admin + Player panels)
+    chihiro.css         ← Spirit World theme CSS variables
+  activities/
+    chihiroActivity.js  ← activity config (titles, missions, allowed commands)
+    chihiroValidators.js ← isomorphic-git validators for missions
+    activityRuntime.js  ← which activity is active (used by commandRunner)
+  stellar/
+    stellarClient.js    ← all Stellar SDK logic
+  ui/
+    shell/
+      AppShell.tsx      ← IDE-style layout (activity bar + sidebar + editor + terminal)
+      AppShell.css      ← includes responsive breakpoints (mobile < 768px, tablet 768-1024)
+      components/
+        ActivityBar.tsx ← vertical nav (desktop) + horizontal bottom nav (mobile)
+        SideBar.tsx     ← panel switcher (Explorer / Instructions / Git Graph / Missions)
+  pages/
+    HomePage.jsx       ← activity selector
+    ActivityPage.jsx   ← main game page
+  Terminal.jsx         ← terminal emulator (uses isomorphic-git internally)
+  commandRunner.js     ← git command parser + executor
+
+public/locales/
+  es/  common.json  terminal.json  zk.json
+  en/  common.json  terminal.json  zk.json
+```
+
+## Environment variables (.env)
+```
+VITE_CHIHIRO_CONTRACT_ID=C...     # your deployed ChihiroGame contract
+VITE_ULTRAHONK_VERIFIER_ID=C...  # UltraHonk verifier contract on testnet
+```
+
+## Common tasks
+
+### Add a new translation key
+1. Add to `public/locales/es/common.json` (or terminal.json / zk.json)
+2. Add to `public/locales/en/common.json` (same namespace)
+3. Use in component: `const { t } = useTranslation(); t("yourKey")`
+
+### Add a new mission
+Edit `src/activities/chihiroActivity.js` — add to `missions[]` array
+Add validator in `src/activities/chihiroValidators.js`
+
+### Deploy the contract (Soroban)
+```bash
+cd gitBDB-contracts
+cargo build --target wasm32v1-none --release
+stellar contract upload --wasm target/wasm32v1-none/release/chihiro_game.wasm --source admin --network testnet
+stellar contract deploy --wasm-hash <HASH> --source admin --network testnet
+```
+
+### Compile the Noir circuit
+```bash
+cd gitBDB-circuits/chihiro-name
+nargo build
+# output: target/chihiro_name.json
+```
+
+## What NOT to do
+- Don't use `SorobanRpc.Server` — use `import { Server } from "@stellar/stellar-sdk/rpc"`
+- Don't hardcode user-visible strings
+- Don't add Redux or Zustand — state is local + useContext
+- Don't use `git add .` in examples — the simulator teaches file-by-file staging
+- Don't import from `src/i18n/translations.js` — it's deprecated
+- Don't remove `start_game()` / `end_game()` calls — required by hackathon rules

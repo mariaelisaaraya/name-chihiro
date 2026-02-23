@@ -1,0 +1,5 @@
+[package]
+name = "chihiro_commit"
+type = "bin"
+authors = ["gitBDB"]
+compiler_version = ">=0.36.0"

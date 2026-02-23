@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <!-- viewport-fit=cover: fills notch/island area on iPhone -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <!-- Prevents iOS from auto-zooming inputs (we handle it via font-size: 16px in CSS) -->
+    <meta name="format-detection" content="telephone=no" />
+    <!-- Theme color for browser chrome on mobile -->
+    <meta name="theme-color" content="#060a12" />
+    <!-- PWA-style: hide browser UI when launched from home screen -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <title>🌊 Chihiro's Lost Name — gitBDB</title>
+    <meta name="description" content="Learn Git through a ZK gaming experience on Stellar Soroban. Complete the sacred Git ritual and prove your secret name without revealing it." />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      // Clear all service workers that might be cached from previous sessions
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(registrations => {
+          registrations.forEach(reg => {
+            reg.unregister().catch(err => console.log('SW unregister error:', err));
+          });
+        }).catch(err => console.log('SW getRegistrations error:', err));
+      }
+      // Clear caches
+      if ('caches' in window) {
+        caches.keys().then(names => {
+          names.forEach(name => {
+            caches.delete(name).catch(err => console.log('Cache delete error:', err));
+          });
+        }).catch(err => console.log('Caches.keys error:', err));
+      }
+    </script>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

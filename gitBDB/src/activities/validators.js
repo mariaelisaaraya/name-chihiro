@@ -1,0 +1,53 @@
+// src/activities/validators.js
+// Mapa de validadores disponibles para ser referenciados por ID.
+import {
+  validateMission1,
+  validateMission2,
+  validateMission3,
+  validateMission4,
+  validateMission5,
+  validateMission6,
+  validateMission7,
+  validateMission8,
+  validateMission9,
+  validateMission10,
+  validateMission11,
+  validateMission12,
+  validateMission13,
+  validateMission14,
+  validateMission15,
+  validateMission16,
+  validateMission17,
+  validateMission18,
+  validateMission19,
+} from "../missionValidator";
+import {
+  validateChihiroM1,
+  validateChihiroM2,
+  validateChihiroM3,
+} from "./chihiroValidators";
+
+export const validators = {
+  m1: validateMission1,
+  m2: validateMission2,
+  m3: validateMission3,
+  m4: validateMission4,
+  m5: validateMission5,
+  m6: validateMission6,
+  m7: validateMission7,
+  m8: validateMission8,
+  m9: validateMission9,
+  m10: validateMission10,
+  m11: validateMission11,
+  m12: validateMission12,
+  m13: validateMission13,
+  m14: validateMission14,
+  m15: validateMission15,
+  m16: validateMission16,
+  m17: validateMission17,
+  m18: validateMission18,
+  m19: validateMission19,
+  "chihiro-m1": validateChihiroM1,
+  "chihiro-m2": validateChihiroM2,
+  "chihiro-m3": validateChihiroM3,
+};

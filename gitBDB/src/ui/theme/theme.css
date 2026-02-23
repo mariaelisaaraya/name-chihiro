@@ -1,0 +1,54 @@
+:root {
+  /* Theme Dark (default) */
+  --vsc-bg: #1e1e1e;
+  --vsc-sidebar-bg: #252526;
+  --vsc-activitybar-bg: #2c2c2c;
+  --vsc-editor-bg: #1e1e1e;
+  --vsc-panel-bg: #1f1f1f;
+  --vsc-bottompanel-bg: #252526;
+  --vsc-statusbar-bg: #007acc;
+  --vsc-border: #3c3c3c;
+  --vsc-text: #d4d4d4;
+  --vsc-accent: #0e639c;
+  --vsc-muted: #8c8c8c;
+  --vsc-mono: "Cascadia Code", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  
+  /* Interactive states */
+  --vsc-hover-bg: rgba(255, 255, 255, 0.08);
+  --vsc-active-bg: rgba(255, 255, 255, 0.12);
+  --vsc-focus-border: #007acc;
+}
+
+[data-theme="light"] {
+  --vsc-bg: #f3f3f3;
+  --vsc-sidebar-bg: #eaeaea;
+  --vsc-activitybar-bg: #e0e0e0;
+  --vsc-editor-bg: #ffffff;
+  --vsc-panel-bg: #f5f5f5;
+  --vsc-bottompanel-bg: #eaeaea;
+  --vsc-statusbar-bg: #006bbd;
+  --vsc-border: #d0d0d0;
+  --vsc-text: #333333;
+  --vsc-accent: #006bbd;
+  --vsc-muted: #6b7280;
+  
+  /* Interactive states */
+  --vsc-hover-bg: rgba(0, 0, 0, 0.05);
+  --vsc-active-bg: rgba(0, 0, 0, 0.1);
+  --vsc-focus-border: #006bbd;
+}
+
+/* Smooth theme transitions */
+* {
+  transition-property: background-color, border-color, color;
+  transition-duration: 120ms;
+  transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition-duration: 0ms !important;
+    animation-duration: 0ms !important;
+  }
+}

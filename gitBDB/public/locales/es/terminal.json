@@ -1,0 +1,155 @@
+{
+  "welcome": "Bienvenido al Entrenador Git",
+  "help": "Escribí \"help\" para ver los comandos disponibles.",
+  "catNotFound": "cat: archivo no encontrado: {{file}}",
+  "unknown": "Comando desconocido: {{input}}\nEscribí \"help\" para ver los comandos disponibles.",
+  "internalError": "Error interno al procesar el comando git.",
+  "gitHubError": "Error interno al procesar el comando GitHub simulado.",
+  "noPRs": "No hay Pull Requests simulados todavía.",
+  "prList": "Pull Requests simulados:",
+  "noRepoYet": "Parece que todavía no inicializaste el repositorio.",
+  "gitUsage": "Uso: git <comando>",
+  "addUsage": "Uso: git add <archivo>",
+  "checkoutUsage": "Uso: git checkout <rama-o-hash>",
+  "cloneUsage": "Uso: git clone <url>",
+  "remoteAddUsage": "Uso: git remote add <nombre> <url>",
+  "remoteRemoveUsage": "Uso: git remote remove <nombre>",
+  "remoteUsage": "Uso: git remote [-v | add | remove]",
+  "pagesUsage": "Uso: git pages [publish | republish]",
+  "githubCreateUsage": "Uso: github create <nombre-repo>",
+  "prCreateUsage": "Uso: github pr create <rama-origen> [rama-destino]",
+  "prMergeUsage": "Uso: github pr merge <id>",
+  "prIdMustBeNumber": "El id del PR debe ser un número.",
+  "unknownGit": "Comando git desconocido: \"{{sub}}\". Usá \"git help\" o \"help\" para ver los comandos disponibles.",
+  "blockedCommand": "El comando \"{{cmd}}\" no está disponible en esta actividad.",
+  "addDotLine1": "Este simulador no usa \"git add .\".",
+  "addDotLine2": "💡 Tip: agregá archivos de a uno, por ejemplo:",
+  "addDotLine3": "    git add index.html",
+  "addDotFiles": "Archivos disponibles en /repo:",
+  "helpTitle": "Comandos disponibles:",
+  "helpHelp": "  help                        - Mostrar esta ayuda",
+  "helpLs": "  ls                          - Listar archivos en /repo",
+  "helpCat": "  cat <archivo>               - Ver contenido de un archivo",
+  "helpTouch": "  touch <archivo>             - Crear un archivo vacío",
+  "helpPwd": "  pwd                         - Mostrar directorio actual",
+  "helpGitLocal": "Git Local:",
+  "helpInit": "  git init                    - Inicializar un repositorio Git",
+  "helpStatus": "  git status                  - Ver estado del repositorio",
+  "helpAdd": "  git add <archivo>           - Agregar archivo al stage",
+  "helpCommit": "  git commit -m \"mensaje\"     - Crear un commit",
+  "helpLog": "  git log [rama]              - Ver historial de commits",
+  "helpBranch": "  git branch                  - Listar ramas",
+  "helpBranchNew": "  git branch <n>              - Crear una nueva rama",
+  "helpCheckout": "  git checkout <rama|hash>    - Cambiar a rama o commit",
+  "helpMerge": "  git merge <rama>            - Mergear rama en la actual",
+  "helpConflicts": "  git conflicts               - Ver archivos con conflictos",
+  "helpGitRemote": "Git Remoto:",
+  "helpRemote": "  git remote [-v]             - Listar remotos configurados",
+  "helpRemoteAdd": "  git remote add <n> <url>    - Agregar un remoto",
+  "helpRemoteRemove": "  git remote remove <n>       - Eliminar un remoto",
+  "helpPush": "  git push origin <rama>      - Enviar commits al remoto",
+  "helpPull": "  git pull origin <rama>      - Traer commits del remoto",
+  "helpClone": "  git clone <url>             - Clonar repositorio remoto",
+  "helpPages": "GitHub Pages (simulado):",
+  "helpPagesPublish": "  git pages publish           - Publicar sitio en Pages",
+  "helpPagesRepublish": "  git pages republish         - Actualizar sitio publicado",
+  "helpGitHub": "GitHub Simulado:",
+  "helpGhCreate": "  github create <n>               - Crear repo remoto simulado",
+  "helpGhStatus": "  github status                   - Ver estado del remoto simulado",
+  "helpGhPrCreate": "  github pr create <from> [to]    - Crear Pull Request simulado",
+  "helpGhPrList": "  github pr list                  - Listar Pull Requests simulados",
+  "helpGhPrMerge": "  github pr merge <id>            - Marcar PR como MERGED",
+  "hintInit": [
+    "git init crea la carpeta .git y empieza a rastrear el historial de este proyecto.",
+    "Usalo solo una vez al crear un repositorio nuevo."
+  ],
+  "hintStatus": [
+    "git status muestra qué archivos cambiaron y si están en el stage (listos para commit) o no.",
+    "Útil para revisar antes de hacer git add o git commit."
+  ],
+  "hintAdd": [
+    "git add agrega archivos al stage para el próximo commit.",
+    "Usalo para elegir qué cambios incluir en un commit."
+  ],
+  "hintAddDot": [
+    "git add agrega archivos al stage para el próximo commit.",
+    "En la vida real podrías usar git add . para todo, pero acá practicamos archivo por archivo 😉."
+  ],
+  "hintCommit": [
+    "git commit guarda un snapshot de los archivos en el stage.",
+    "Elegí mensajes claros para recordar qué cambio se hizo en cada commit."
+  ],
+  "hintLog": [
+    "git log muestra el historial de commits.",
+    "Podés usar git log nombre-rama para ver otra rama."
+  ],
+  "hintBranchList": [
+    "git branch lista las ramas locales.",
+    "Crear ramas nuevas te permite probar cosas sin romper la rama principal."
+  ],
+  "hintBranchCreate": [
+    "git branch <n> crea una nueva rama apuntando al commit actual.",
+    "Buena práctica: una rama por feature o tarea."
+  ],
+  "hintCheckout": [
+    "git checkout cambia la rama activa.",
+    "Usalo para moverte entre versiones del proyecto (ej: main, feature/login, etc.)."
+  ],
+  "hintCheckoutCommit": [
+    "git checkout <hash> te lleva a un commit específico (detached HEAD).",
+    "Útil para ver cómo estaba el proyecto en ese momento.",
+    "Para volver a una rama: git checkout main"
+  ],
+  "hintMerge": [
+    "git merge integra commits de otra rama en la rama actual.",
+    "Si hay conflictos, resolvelos en los archivos y después hacé git add + git commit."
+  ],
+  "hintConflictsNone": [
+    "Los conflictos ocurren cuando dos ramas modifican la misma parte de un archivo.",
+    "Si corriste git merge y no hay conflictos, el merge fue automático."
+  ],
+  "hintConflicts": [
+    "git conflicts localiza rápidamente archivos con marcadores de conflicto.",
+    "Combinado con el editor, guía paso a paso la resolución."
+  ],
+  "hintPush": [
+    "git push envía tus commits al remoto (ej: GitHub).",
+    "Este simulador usa un GitHub falso para que puedas practicar sin tocar repos reales."
+  ],
+  "hintPull": [
+    "git pull trae commits del remoto y los mergea en tu rama actual.",
+    "Equivale a: git fetch + git merge"
+  ],
+  "hintClone": [
+    "git clone copia un repositorio remoto a tu máquina local.",
+    "La forma más común de empezar a trabajar en un proyecto existente."
+  ],
+  "hintRemoteAdd": [
+    "git remote add configura un repositorio remoto.",
+    "Luego podés hacer push/pull a ese remoto."
+  ],
+  "hintRemoteRemove": [
+    "git remote remove elimina la configuración de un remoto."
+  ],
+  "hintRemoteList": [
+    "git remote -v lista los remotos configurados.",
+    "Cada remoto tiene una URL de fetch y otra de push."
+  ],
+  "hintPages": [
+    "GitHub Pages te permite publicar sitios web estáticos desde tu repositorio.",
+    "Es gratis y muy usado para portfolios, documentación y proyectos pequeños."
+  ],
+  "hintPagesRepublish": [
+    "Republish actualiza tu sitio con los últimos cambios.",
+    "En GitHub real esto pasa automáticamente con cada push."
+  ],
+  "conflictNoFiles": "No se detectaron archivos con marcadores de conflicto (<<<<<<< ======= >>>>>>>) en /repo.",
+  "conflictFound": "Archivos con conflictos detectados (buscando <<<<<<<, =======, >>>>>>>):",
+  "conflictSteps": "Pasos típicos para resolver conflictos:",
+  "conflictStep1": "  1. Abrí el archivo en el editor.",
+  "conflictStep2": "  2. Elegí qué versión conservar (o combiná ambas) y borrá los marcadores.",
+  "conflictStep3": "  3. Guardá el archivo.",
+  "conflictStep4": "  4. Ejecutá: git add <archivo>",
+  "conflictStep5": "  5. Luego: git commit -m \"Resolver conflicto de merge\"",
+  "prListHeader": "Pull Requests simulados:"
+}
