@@ -1,6 +1,8 @@
-# Deploy Prove-Server en Replit (GRATIS)
+# Deploy Prove Server on Replit (Free Tier)
 
-## Pasos:
+This guide explains how to deploy the proof generation server on Replit as a free alternative to running it locally.
+
+## Steps:
 
 ### 1. Crea un nuevo Replit
 - Ir a https://replit.com/~

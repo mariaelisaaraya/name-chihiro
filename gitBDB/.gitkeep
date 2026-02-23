@@ -1,0 +1,4 @@
+# Legacy Vite Application
+
+This directory contains the original Vite-based implementation of Chihiro's Lost Name.
+The project has been migrated to Next.js 16 (root directory), but this version is preserved for reference.
