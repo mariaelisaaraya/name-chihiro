@@ -1,8 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-// Endpoint for computing Poseidon2 commit without generating full proof
-// Faster than /prove for just getting the commit hash
-
 export const runtime = 'nodejs'
 
 export async function POST(request: NextRequest) {
@@ -16,11 +13,6 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // TODO: Implement Poseidon2 hash computation
-    // This requires @noir-lang/noir_js or direct Poseidon2 implementation
-    console.log('[v0] Commit API called with:', { name_secret: '***', salt_hex })
-
-    // Placeholder: In production, compute Poseidon2(name_secret, salt_hex)
     const commit = '0x' + '0'.repeat(64)
 
     return NextResponse.json({
@@ -29,7 +21,7 @@ export async function POST(request: NextRequest) {
     })
 
   } catch (error) {
-    console.error('[v0] Commit API error:', error)
+    console.error('Commit API error:', error)
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }

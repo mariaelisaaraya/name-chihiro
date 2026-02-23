@@ -5,17 +5,10 @@ type GameSession = Database['public']['Tables']['game_sessions']['Row']
 type SessionPlayer = Database['public']['Tables']['session_players']['Row']
 type GameMove = Database['public']['Tables']['game_moves']['Row']
 
-/**
- * Generate a unique 8-character session code
- * Following Stellar Game Studio pattern for shareable game sessions
- */
 export function generateSessionCode(): string {
   return nanoid(8).toUpperCase()
 }
 
-/**
- * Create a new multiplayer game session
- */
 export async function createGameSession(
   hostId: string,
   maxPlayers: number = 4
@@ -36,7 +29,7 @@ export async function createGameSession(
     .single()
 
   if (error) {
-    console.error('[v0] Create session error:', error)
+    console.error('Create session error:', error)
     return null
   }
 
@@ -46,9 +39,6 @@ export async function createGameSession(
   }
 }
 
-/**
- * Join an existing game session
- */
 export async function joinGameSession(
   sessionCode: string,
   playerId: string,
@@ -57,7 +47,6 @@ export async function joinGameSession(
 ): Promise<{ sessionId: string } | null> {
   const supabase = getSupabaseClient()
 
-  // Find session by code
   const { data: session, error: sessionError } = await supabase
     .from('game_sessions')
     .select('id, max_players')
@@ -65,22 +54,20 @@ export async function joinGameSession(
     .single()
 
   if (sessionError || !session) {
-    console.error('[v0] Session not found:', sessionError)
+    console.error('Session not found:', sessionError)
     return null
   }
 
-  // Check if session is full
   const { count } = await supabase
     .from('session_players')
     .select('*', { count: 'exact', head: true })
     .eq('session_id', session.id)
 
   if (count && count >= session.max_players) {
-    console.error('[v0] Session is full')
+    console.error('Session is full')
     return null
   }
 
-  // Add player to session
   const { error: joinError } = await supabase
     .from('session_players')
     .insert({
@@ -93,16 +80,13 @@ export async function joinGameSession(
     })
 
   if (joinError) {
-    console.error('[v0] Join session error:', joinError)
+    console.error('Join session error:', joinError)
     return null
   }
 
   return { sessionId: session.id }
 }
 
-/**
- * Get session details with all players
- */
 export async function getSession(sessionCode: string) {
   const supabase = getSupabaseClient()
 
@@ -128,9 +112,6 @@ export async function getSession(sessionCode: string) {
   }
 }
 
-/**
- * Update player ready status
- */
 export async function updatePlayerReady(
   sessionId: string,
   playerId: string,
@@ -145,16 +126,13 @@ export async function updatePlayerReady(
     .eq('player_id', playerId)
 
   if (error) {
-    console.error('[v0] Update ready error:', error)
+    console.error('Update ready error:', error)
     return false
   }
 
   return true
 }
 
-/**
- * Update game state
- */
 export async function updateGameState(
   sessionId: string,
   gameState: Record<string, any>,
@@ -171,16 +149,13 @@ export async function updateGameState(
     .eq('id', sessionId)
 
   if (error) {
-    console.error('[v0] Update game state error:', error)
+    console.error('Update game state error:', error)
     return false
   }
 
   return true
 }
 
-/**
- * Record a game move with optional ZK proof
- */
 export async function recordGameMove(
   sessionId: string,
   playerId: string,
@@ -199,16 +174,13 @@ export async function recordGameMove(
   })
 
   if (error) {
-    console.error('[v0] Record move error:', error)
+    console.error('Record move error:', error)
     return false
   }
 
   return true
 }
 
-/**
- * Get all moves for a session
- */
 export async function getSessionMoves(sessionId: string) {
   const supabase = getSupabaseClient()
 
@@ -219,7 +191,7 @@ export async function getSessionMoves(sessionId: string) {
     .order('created_at', { ascending: true })
 
   if (error) {
-    console.error('[v0] Get moves error:', error)
+    console.error('Get moves error:', error)
     return []
   }
 

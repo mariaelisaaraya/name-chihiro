@@ -33,10 +33,6 @@ interface GameMoveUpdate {
   created_at: string
 }
 
-/**
- * Real-time subscription hook for multiplayer game sessions
- * Follows Stellar Game Studio pattern for WebSocket-based game state sync
- */
 export function useRealtimeSession(sessionId: string | null) {
   const [channel, setChannel] = useState<RealtimeChannel | null>(null)
   const [isConnected, setIsConnected] = useState(false)
@@ -47,13 +43,9 @@ export function useRealtimeSession(sessionId: string | null) {
   useEffect(() => {
     if (!sessionId) return
 
-    console.log('[v0] Setting up real-time subscription for session:', sessionId)
     const supabase = getSupabaseClient()
-
-    // Create channel for this session
     const realtimeChannel = supabase.channel(`game-session-${sessionId}`)
 
-    // Subscribe to game_sessions changes
     realtimeChannel
       .on(
         'postgres_changes',
@@ -64,7 +56,6 @@ export function useRealtimeSession(sessionId: string | null) {
           filter: `id=eq.${sessionId}`,
         },
         (payload) => {
-          console.log('[v0] Session updated:', payload)
           setSessionUpdate(payload.new as GameSessionUpdate)
         }
       )
@@ -77,7 +68,6 @@ export function useRealtimeSession(sessionId: string | null) {
           filter: `session_id=eq.${sessionId}`,
         },
         (payload) => {
-          console.log('[v0] Player update:', payload)
           if (payload.eventType === 'INSERT') {
             setPlayerUpdates((prev) => [...prev, payload.new as PlayerUpdate])
           } else if (payload.eventType === 'UPDATE') {
@@ -100,27 +90,22 @@ export function useRealtimeSession(sessionId: string | null) {
           filter: `session_id=eq.${sessionId}`,
         },
         (payload) => {
-          console.log('[v0] New move:', payload)
           setMoveUpdates((prev) => [...prev, payload.new as GameMoveUpdate])
         }
       )
       .subscribe((status) => {
-        console.log('[v0] Subscription status:', status)
         setIsConnected(status === 'SUBSCRIBED')
       })
 
     setChannel(realtimeChannel)
 
-    // Cleanup on unmount
     return () => {
-      console.log('[v0] Cleaning up real-time subscription')
       realtimeChannel.unsubscribe()
     }
   }, [sessionId])
 
   const disconnect = useCallback(() => {
     if (channel) {
-      console.log('[v0] Disconnecting channel')
       channel.unsubscribe()
       setChannel(null)
       setIsConnected(false)
@@ -136,16 +121,12 @@ export function useRealtimeSession(sessionId: string | null) {
   }
 }
 
-/**
- * Hook for broadcasting presence (heartbeat)
- */
 export function usePresence(sessionId: string | null, playerId: string | null) {
   useEffect(() => {
     if (!sessionId || !playerId) return
 
     const supabase = getSupabaseClient()
 
-    // Update last_active every 30 seconds
     const interval = setInterval(async () => {
       const { error } = await supabase
         .from('session_players')
@@ -154,7 +135,7 @@ export function usePresence(sessionId: string | null, playerId: string | null) {
         .eq('player_id', playerId)
 
       if (error) {
-        console.error('[v0] Presence update error:', error)
+        console.error('Presence update error:', error)
       }
     }, 30000)
 

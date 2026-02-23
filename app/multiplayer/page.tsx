@@ -57,7 +57,7 @@ export default function MultiplayerPage() {
       router.push(`/multiplayer?session=${result.sessionCode}`)
 
     } catch (err) {
-      console.error('[v0] Create session error:', err)
+      console.error('Create session error:', err)
       setError('Error al crear sesión')
     } finally {
       setIsCreating(false)
@@ -90,7 +90,7 @@ export default function MultiplayerPage() {
       router.push(`/multiplayer?session=${sessionCode}`)
 
     } catch (err) {
-      console.error('[v0] Join session error:', err)
+      console.error('Join session error:', err)
       setError('Error al unirse a la sesión')
     } finally {
       setIsJoining(false)
